@@ -1,0 +1,25 @@
+.main {
+  display: flex;
+  justify-content: center;
+}
+
+.main-h1 {
+  font-size: 3.5rem;
+  margin-top: 40px;
+  font-weight: 800;
+  font-family: Metropolis, sans-serif;
+}
+
+.main-description {
+  max-width: 60rem;
+  font-size: 1.5rem;
+  font-weight: 300;
+  line-height: 2.2rem;
+  margin-top: 20px;
+}
+.my-6 {
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  display: flex;
+  flex-direction: column;
+}

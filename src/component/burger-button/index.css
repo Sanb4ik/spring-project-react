@@ -1,0 +1,20 @@
+.hm-menu {
+  border: none;
+  background-color: transparent;
+  z-index: 5;
+  display: block;
+}
+
+.hm-menu div {
+  display: block;
+  z-index: 5;
+}
+
+@media screen and (min-width: 901px) {
+  .hm-menu {
+    display: none;
+  }
+  .navbar-menu {
+    display: block;
+  }
+}
