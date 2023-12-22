@@ -16,7 +16,7 @@ const Header = () => {
         ) : (
           <>
             <CloseButton setShow={setShow} />
-            <NavbarMenuMobile />
+            <NavbarMenuMobile show={show} />
           </>
         )}
         <NavbarMenu />

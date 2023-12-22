@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { MENU_ITEMS_DATA } from '../../constant';
 import { generateDropDownItems } from '../navbar-menu';
 import './index.css';
+
 const createDropdownMenuForMobile = (menuData, openIndex, setOpenIndex) => {
   const handleListClick = (index) => {
     if (openIndex === index) {
@@ -24,14 +25,14 @@ const createDropdownMenuForMobile = (menuData, openIndex, setOpenIndex) => {
   );
 };
 
-const NavbarMenuMobile = () => {
+const NavbarMenuMobile = (show) => {
   const [open, setOpen] = useState('');
 
   const renderedMenus = MENU_ITEMS_DATA.map((menu) =>
     createDropdownMenuForMobile(menu, open, setOpen),
   );
   return (
-    <div className='overlay'>
+    <div className={`overlay ${show && 'show'}`}>
       <div className='burger-menu'>
         <div className='menu-content'>{renderedMenus}</div>;
       </div>

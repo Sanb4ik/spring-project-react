@@ -1,9 +1,15 @@
 .overlay {
-  display: block;
-}
-
-.burger-menu {
-  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #191e1e;
+  z-index: 3;
+  display: flex;
+  align-items: flex-start;
+  transition: all 3s ease;
+  transform: translateY(-100%);
 }
 
 .menu-content {
@@ -70,6 +76,10 @@
   color: #6cb52d;
 }
 
+.overlay.show {
+  transform: translateY(0);
+}
+
 .dropdown-m.show {
   display: block;
   height: max-content;
@@ -88,16 +98,6 @@
 }
 
 @media screen and (max-width: 900px) {
-  .overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: #191e1e;
-    z-index: 3;
-  }
-
   .close {
     position: fixed;
     right: 32px;
@@ -117,12 +117,6 @@
     height: 100%;
     background-color: #191e1e;
     z-index: 3;
-    /*transform: translateY(-100%);*/
-    transition: transform 0.3s ease-in-out;
     overflow-y: auto;
-  }
-
-  .navbar-menu {
-    display: none;
   }
 }
