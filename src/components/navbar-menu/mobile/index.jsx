@@ -27,7 +27,7 @@ const DropdownMenu = ({ menuData, openIndex, setOpenIndex }) => {
   );
 };
 
-const NavbarMenuMobile = (show) => {
+const NavbarMenuMobile = ({ show }) => {
   const [open, setOpen] = useState('');
 
   return (
