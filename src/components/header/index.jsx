@@ -4,7 +4,6 @@ import NavbarMenu from '../navbar-menu/desktop';
 import NavbarMenuMobile from '../navbar-menu/mobile';
 import { useState } from 'react';
 import BurgerBtn from '../burger-button';
-import CloseButton from '../close-button';
 const Header = () => {
   const [show, setShow] = useState(true);
   return (
@@ -14,10 +13,7 @@ const Header = () => {
         {show ? (
           <BurgerBtn setShow={setShow} />
         ) : (
-          <>
-            <CloseButton setShow={setShow} />
-            <NavbarMenuMobile show={show} />
-          </>
+          <NavbarMenuMobile show={show} setShow={setShow} />
         )}
         <NavbarMenu />
       </nav>

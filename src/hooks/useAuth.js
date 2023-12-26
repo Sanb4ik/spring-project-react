@@ -2,7 +2,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { setUser, setError, selectError } from '../store/authSlice';
 import { selectUser } from '../store/authSlice';
 
-const useAuth = () => {
+export const useAuth = () => {
   const user = useSelector(selectUser);
   const isError = useSelector(selectError);
   const dispatch = useDispatch();
@@ -19,4 +19,4 @@ const useAuth = () => {
   };
 };
 
-export default useAuth;
+// export default useAuth;

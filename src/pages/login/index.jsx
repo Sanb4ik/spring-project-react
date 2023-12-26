@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import './index.css';
 import SpringLogo from '../../components/spring-logo';
 import LoginInput from '../../components/login-input';
-import useAuth from '../../hooks/useAuth';
+import { useAuth } from '../../hooks';
 
 const LoginPage = () => {
   const [userName, setUserName] = useState('');
