@@ -79,9 +79,11 @@
   border: 1px solid #bdbdbd;
 }
 
-.letterpress {
-  z-index: 3;
-  font-size: 4rem;
-  font-weight: 600;
-  color: #6cb52d;
+@media screen and (max-width: 450px) {
+  .login-form {
+    width: 300px;
+  }
+  .login-form .logo {
+    width: 70%;
+  }
 }
