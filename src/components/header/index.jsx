@@ -1,21 +1,21 @@
 import './index.css';
 import SpringLogo from '../spring-logo';
-import NavbarMenu from '../navbar-menu/desktop';
+import NavbarMenuDesktop from '../navbar-menu/desktop';
 import NavbarMenuMobile from '../navbar-menu/mobile';
 import { useState } from 'react';
 import BurgerBtn from '../burger-button';
+import CloseButton from '../close-button';
 const Header = () => {
-  const [show, setShow] = useState(true);
+  const [show, setShow] = useState(false);
+
   return (
     <header className='header'>
       <nav className='nav container'>
         <SpringLogo />
-        {show ? (
-          <BurgerBtn setShow={setShow} />
-        ) : (
-          <NavbarMenuMobile show={show} setShow={setShow} />
-        )}
-        <NavbarMenu />
+        <BurgerBtn setShow={setShow} />
+        {show && <CloseButton setShow={setShow} />}
+        <NavbarMenuMobile show={show} />
+        <NavbarMenuDesktop />
       </nav>
     </header>
   );

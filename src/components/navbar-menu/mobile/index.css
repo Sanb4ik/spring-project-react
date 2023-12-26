@@ -100,7 +100,7 @@
 @media screen and (max-width: 900px) {
   .close {
     position: fixed;
-    right: 32px;
+    right: 25px;
     top: 20px;
     width: 32px;
     height: 32px;

@@ -1,16 +1,6 @@
 import './index.css';
-const CloseButton = ({ setShow, setTransition }) => {
-  return (
-    <button
-      className='close'
-      onClick={() => {
-        setTransition('');
-        setTimeout(() => {
-          setShow(true);
-        }, 400);
-      }}
-    ></button>
-  );
+const CloseButton = ({ setShow }) => {
+  return <button className='close' onClick={() => setShow(false)}></button>;
 };
 
 export default CloseButton;

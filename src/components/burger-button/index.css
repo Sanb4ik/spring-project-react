@@ -1,13 +1,13 @@
 .hm-menu {
   border: none;
   background-color: transparent;
-  z-index: 5;
+  z-index: 2;
   display: block;
 }
 
 .hm-menu div {
   display: block;
-  z-index: 5;
+  z-index: 2;
 }
 
 @media screen and (min-width: 901px) {

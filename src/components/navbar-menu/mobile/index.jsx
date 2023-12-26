@@ -1,8 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { MENU_ITEMS_DATA } from '../../../constant';
 import './index.css';
 import DropDownItem from '../dropdown-item';
-import CloseButton from '../../close-button';
 
 const DropdownMenu = ({ menuData, openIndex, setOpenIndex }) => {
   const handleListClick = (index) => {
@@ -28,36 +27,24 @@ const DropdownMenu = ({ menuData, openIndex, setOpenIndex }) => {
   );
 };
 
-const NavbarMenuMobile = ({ show, setShow }) => {
+const NavbarMenuMobile = (show) => {
   const [open, setOpen] = useState('');
-  const [transition, setTransition] = useState('');
-
-  useEffect(() => {
-    const delay = setTimeout(() => {
-      setTransition('show');
-    }, 0);
-
-    return () => clearTimeout(delay);
-  }, [show]);
 
   return (
-    <>
-      <CloseButton setShow={setShow} setTransition={setTransition} />
-      <div className={`overlay ${transition}`}>
-        <div className='burger-menu'>
-          <div className='menu-content'>
-            {MENU_ITEMS_DATA.map((menu) => (
-              <DropdownMenu
-                key={`${menu.title}_m`}
-                menuData={menu}
-                openIndex={open}
-                setOpenIndex={setOpen}
-              />
-            ))}
-          </div>
+    <div className={`overlay ${show ? ' show' : ''}`}>
+      <div className='burger-menu'>
+        <div className='menu-content'>
+          {MENU_ITEMS_DATA.map((menu) => (
+            <DropdownMenu
+              key={`${menu.title}_m`}
+              menuData={menu}
+              openIndex={open}
+              setOpenIndex={setOpen}
+            />
+          ))}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

@@ -16,7 +16,7 @@ const DropdownMenu = ({ menuData }) => {
   );
 };
 
-const NavbarMenu = () => {
+const NavbarMenuDesktop = () => {
   return (
     <div className='navbar-menu'>
       {MENU_ITEMS_DATA.map((menu) => (
@@ -26,4 +26,4 @@ const NavbarMenu = () => {
   );
 };
 
-export default NavbarMenu;
+export default NavbarMenuDesktop;
