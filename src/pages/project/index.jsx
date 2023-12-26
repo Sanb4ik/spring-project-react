@@ -1,7 +1,7 @@
 import './index.css';
-import Header from '../../component/header';
-import ProjectInfo from '../../component/info-section';
-import ProjectsSection from '../../component/projects-section';
+import Header from '../../components/header';
+import ProjectInfo from '../../components/info-section';
+import ProjectsSection from '../../components/projects-section';
 const ProjectPage = () => {
   return (
     <div>

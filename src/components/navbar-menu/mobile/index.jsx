@@ -1,9 +1,9 @@
 import { useState } from 'react';
-import { MENU_ITEMS_DATA } from '../../constant';
-import { generateDropDownItems } from '../navbar-menu';
+import { MENU_ITEMS_DATA } from '../../../constant';
 import './index.css';
+import DropDownItem from '../dropdown-item';
 
-const createDropdownMenuForMobile = (menuData, openIndex, setOpenIndex) => {
+const DropdownMenu = ({ menuData, openIndex, setOpenIndex }) => {
   const handleListClick = (index) => {
     if (openIndex === index) {
       setOpenIndex(null);
@@ -19,7 +19,9 @@ const createDropdownMenuForMobile = (menuData, openIndex, setOpenIndex) => {
         <button className={`menu-item__arrow ${open ? 'up' : 'down'}`}></button>
       </div>
       <ul className={`dropdown-m ${open && 'show'}`}>
-        {generateDropDownItems(menuData.items, 'my-3', 'dropdown-m__item')}
+        {menuData.items.map((item) => (
+          <DropDownItem key={item.text} item={item} liClass='my-3' aClass='dropdown-m__item' />
+        ))}
       </ul>
     </article>
   );
@@ -28,13 +30,19 @@ const createDropdownMenuForMobile = (menuData, openIndex, setOpenIndex) => {
 const NavbarMenuMobile = (show) => {
   const [open, setOpen] = useState('');
 
-  const renderedMenus = MENU_ITEMS_DATA.map((menu) =>
-    createDropdownMenuForMobile(menu, open, setOpen),
-  );
   return (
     <div className={`overlay ${show && 'show'}`}>
       <div className='burger-menu'>
-        <div className='menu-content'>{renderedMenus}</div>;
+        <div className='menu-content'>
+          {MENU_ITEMS_DATA.map((menu) => (
+            <DropdownMenu
+              key={`${menu.title}_m`}
+              menuData={menu}
+              openIndex={open}
+              setOpenIndex={setOpen}
+            />
+          ))}
+        </div>
       </div>
     </div>
   );
