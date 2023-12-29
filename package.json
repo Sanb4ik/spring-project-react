@@ -21,7 +21,7 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "lint": "prettier -c .",
-    "format": "prettier -w ."
+        "format": "prettier -w ."
   },
   "eslintConfig": {
     "extends": [
@@ -54,10 +54,5 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "husky": "^8.0.3",
     "prettier": "3.1.1"
-  },
-  "husky": {
-    "hooks": {
-          "pre-commit": "npm run format"
-    }
   }
 }
