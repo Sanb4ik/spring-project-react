@@ -1,9 +1,7 @@
-// import { jest } from '@jest/globals';
-import { describe, expect, it } from '@jest/globals';
-import { createUserRequest } from './store/authSlice';
+import { createUserRequest } from '../store/authSlice';
 
-jest.mock('./store/authSlice', () => ({
-  ...jest.requireActual('./store/authSlice'),
+jest.mock('../store/authSlice', () => ({
+  ...jest.requireActual('../store/authSlice'),
   createUserRequest: jest.fn(),
 }));
 

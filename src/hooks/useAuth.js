@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setUser, setError, selectError } from '../store/authSlice';
+import { selectError, createUser } from '../store/authSlice';
 import { selectUser } from '../store/authSlice';
 
 export const useAuth = () => {
@@ -8,8 +8,7 @@ export const useAuth = () => {
   const dispatch = useDispatch();
 
   const login = (userData) => {
-    if (userData.password === '1234' && userData.userName === 'admin') dispatch(setUser(userData));
-    else dispatch(setError());
+    dispatch(createUser(userData));
   };
 
   return {
@@ -18,5 +17,3 @@ export const useAuth = () => {
     login,
   };
 };
-
-// export default useAuth;

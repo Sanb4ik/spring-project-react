@@ -1,28 +1,28 @@
-import { ARTICLES_DATA } from '../../constant';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Search from '../search';
 import './index.css';
+import { fetchArticles } from '../../utils';
 
 const ProjectsSection = () => {
-  const [articles, setArticles] = useState(ARTICLES_DATA);
+  const [articles, setArticles] = useState([]);
+  const [filteredArticles, setFilteredArticles] = useState([]);
 
-  function filterArticles(input) {
-    const filteredArticles = ARTICLES_DATA.filter((item) => {
-      return (
-        item.description.toLowerCase().includes(input.toLowerCase()) ||
-        item.title.toLowerCase().includes(input.toLowerCase())
-      );
-    });
-    setArticles(filteredArticles);
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const result = await fetchArticles();
+        setArticles(result);
+        setFilteredArticles(result);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const createArticles = (articles) => {
-    if (articles.length === 0) {
-      return <h1 className='no_results'>No results</h1>;
-    }
-
-    return articles.map((item, index) => (
-      <article className='article' key={index}>
+  const ArticleItem = ({ item }) => {
+    return (
+      <article className='article'>
         <a className='article-item' href={`https://spring.io/projects/${item.img}`}>
           <img
             className='article-item__img'
@@ -35,13 +35,19 @@ const ProjectsSection = () => {
           </div>
         </a>
       </article>
-    ));
+    );
   };
 
   return (
     <section className='project-section'>
-      <Search setArticles={setArticles} filterArticles={filterArticles} />
-      <div className='list container'>{createArticles(articles)}</div>
+      <Search setArticles={setFilteredArticles} articles={articles} />
+      <div className='list container'>
+        {filteredArticles.length > 0 ? (
+          filteredArticles.map((item) => <ArticleItem key={`${item.title}_a`} item={item} />)
+        ) : (
+          <h1 className='no_results'>No results</h1>
+        )}
+      </div>
     </section>
   );
 };
