@@ -28,6 +28,6 @@ describe('auth tests for async thunk', () => {
     const [start, end] = calls;
     expect(start[0].type).toBe('auth/createUser/pending');
     expect(end[0].type).toBe('auth/createUser/rejected');
-    expect(end[0].error.message).toBe('Failed to create user');
+    expect(end[0].error.message).toBe('Failed to create usder');
   });
 });
