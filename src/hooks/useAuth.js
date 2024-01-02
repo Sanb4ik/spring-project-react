@@ -1,5 +1,5 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { selectError, createUser } from '../store/authSlice';
+import { selectError, createUser, resetError } from '../store/authSlice';
 import { selectUser } from '../store/authSlice';
 
 export const useAuth = () => {
@@ -8,6 +8,7 @@ export const useAuth = () => {
   const dispatch = useDispatch();
 
   const login = (userData) => {
+    dispatch(resetError());
     dispatch(createUser(userData));
   };
 
