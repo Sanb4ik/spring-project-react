@@ -2,10 +2,14 @@ import { useEffect, useState } from 'react';
 import Search from '../search';
 import './index.css';
 import { fetchArticles } from '../../utils';
+import { useNavigate } from 'react-router-dom';
+// import { useSelector } from 'react-redux';
+// import { selectAccessToken } from '../../store/authSlice';
 
 const ProjectsSection = () => {
   const [articles, setArticles] = useState([]);
   const [filteredArticles, setFilteredArticles] = useState([]);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,6 +18,7 @@ const ProjectsSection = () => {
         setArticles(result);
         setFilteredArticles(result);
       } catch (error) {
+        navigate('/login');
         console.error('Error fetching data:', error);
       }
     };

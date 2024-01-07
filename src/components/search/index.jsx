@@ -1,9 +1,11 @@
 import { useEffect, useState } from 'react';
 import './index.css';
 import { searchArticles } from '../../utils';
+import { useNavigate } from 'react-router-dom';
 
 const Search = ({ setArticles, articles }) => {
   const [userInput, setUserInput] = useState('');
+  const navigate = useNavigate();
 
   useEffect(() => {
     const delayDebounceFn = setTimeout(() => {
@@ -14,6 +16,7 @@ const Search = ({ setArticles, articles }) => {
             setArticles(result);
           }
         } catch (error) {
+          navigate('/login');
           console.error('Error fetching data:', error);
         }
       };

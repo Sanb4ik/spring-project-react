@@ -1,12 +1,14 @@
-const LoginInput = ({ type, placeholder, setValue, isError }) => {
+const LoginInput = ({ type = 'text', placeholder, setValue, errorText }) => {
   return (
-    <input
-      // id={type}
-      type={type}
-      placeholder={placeholder}
-      className={`login-field__input ${isError ? 'error' : 'correct'}`}
-      onChange={(e) => setValue(e.target.value)}
-    />
+    <div>
+      <input
+        type={type}
+        placeholder={placeholder}
+        className={`login-field__input ${errorText ? 'error' : 'correct'}`}
+        onChange={(e) => setValue(e.target.value)}
+      />
+      <span className='input-span'>{errorText}</span>
+    </div>
   );
 };
 
