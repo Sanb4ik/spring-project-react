@@ -1,64 +1,30 @@
-import { useEffect, useState } from 'react';
-import io from 'socket.io-client';
+import { useState } from 'react';
 import './index.css';
-import { useAuth } from '../../hooks';
+import useChatSocket from '../../hooks/useChatSocket';
 
 const Chat = () => {
-  const [socket, setSocket] = useState(null);
-  const [messages, setMessages] = useState([]);
+  const { messages, sendMessage } = useChatSocket();
   const [inputMessage, setInputMessage] = useState('');
-  const { getUsername } = useAuth();
 
-  useEffect(() => {
-    const newSocket = io('http://localhost:3000', { withCredentials: true });
-
-    newSocket.on('connect', () => {
-      console.log('Connected to WebSocket server');
-      newSocket.emit('username', getUsername());
-    });
-
-    newSocket.on('message', (message) => {
-      setMessages((prevMessages) => [...prevMessages, message]);
-    });
-
-    newSocket.on('activeUsers', (users) => {
-      console.log('Active users:', users);
-    });
-
-    newSocket.on('userConnected', (username) => {
-      console.log(`User connected: ${username}`);
-    });
-
-    newSocket.on('userDisconnected', (username) => {
-      console.log(`User disconnected: ${username}`);
-    });
-
-    setSocket(newSocket);
-
-    return () => {
-      newSocket.disconnect();
-    };
-  }, []);
-
-  const sendMessage = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
-    let username = getUsername();
-    console.log(username);
-    const data = JSON.stringify({ username: username, message: inputMessage });
-    if (socket && inputMessage.trim() !== '') {
-      socket.emit('message', data);
-      setInputMessage('');
-    }
+    sendMessage(inputMessage);
+    setInputMessage('');
   };
 
   return (
     <div className='chat'>
-      <form className='chat-container' onSubmit={(e) => sendMessage(e)}>
+      <form className='chat-container' onSubmit={(e) => handleSubmit(e)}>
         <h1>Chat Component</h1>
         <div className='message-container'>
           {messages.map((message, index) => (
-            <div key={index} className='message'>
-              {message}
+            <div
+              key={index}
+              className={`message ${message.username === 'you' ? 'sent' : 'received'}`}
+            >
+              <p className='username'>{message.username}</p>
+              {message.text}
+              <p className='time'>{message.time}</p>
             </div>
           ))}
         </div>

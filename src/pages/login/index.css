@@ -112,4 +112,7 @@
   .login-form .logo {
     width: 70%;
   }
+  .login-field__input {
+    width: 240px;
+  }
 }

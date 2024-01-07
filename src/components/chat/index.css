@@ -14,22 +14,59 @@
 .chat-container h1 {
   text-align: center;
   font-size: 24px;
+  font-weight: 600;
   margin-bottom: 20px;
-  color: #333;
 }
 
 .message-container {
   max-height: 400px;
+  display: flex;
+  flex-direction: column;
   overflow-y: auto;
   padding: 10px;
 }
 
 .message {
   background-color: #dcf8c6;
-  padding: 8px 12px;
+  padding: 15px 20px;
   margin-bottom: 8px;
   border-radius: 8px;
   max-width: fit-content;
+  position: relative;
+}
+
+.sent {
+  background-color: #dcf8c6;
+  align-self: flex-end;
+  display: flex;
+}
+
+.received {
+  background-color: #f3f3f3;
+  align-self: flex-start;
+  display: flex;
+}
+.time {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  font-size: 8px;
+  color: #a4a4a4;
+}
+
+.username {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  font-size: 10px;
+}
+
+.sent .username {
+  color: #6cb52d;
+}
+
+.received .username {
+  color: #535353;
 }
 
 .input-message {

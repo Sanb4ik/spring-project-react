@@ -33,6 +33,7 @@ export const loginUser = createAsyncThunk(
       const response = await fetch(`${API_URL}/auth/login`, {
         method: 'POST',
         mode: 'cors',
+        credentials: 'include',
         headers: {
           'Content-Type': 'application/json',
         },
@@ -83,34 +84,44 @@ export const userSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder.addCase(createUser.fulfilled, (state, action) => {
+      state.isError = false;
       state.errorMessage = {};
       state.user = action.payload;
     });
     builder.addCase(createUser.rejected, (state, action) => {
-      if (action.payload) {
-        const { messages } = action.payload;
-        console.log(messages);
-        state.errorMessage = {
-          username: messages.username || '',
-          password: messages.password || '',
-          repeat_password: messages.repeat_password || '',
-          first_name: messages.first_name || '',
-          last_name: messages.last_name || '',
-          age: messages.age || '',
-        };
-      }
-    });
-    builder.addCase(loginUser.fulfilled, (state, action) => {
-      state.isError = false;
-      state.user = action.payload.accessToken;
-    });
-    builder.addCase(loginUser.rejected, (state) => {
       state.isError = true;
+
+      const { message } = action.payload;
+      if (message)
+        state.errorMessage = {
+          username: message.username || '',
+          password: message.password || '',
+          repeat_password: message.repeat_password || '',
+          first_name: message.first_name || '',
+          last_name: message.last_name || '',
+          age: message.age || '',
+        };
+    });
+    builder.addCase(loginUser.fulfilled, (state) => {
+      state.isError = false;
+      state.errorMessage = {};
+    });
+    builder.addCase(loginUser.rejected, (state, action) => {
+      state.isError = true;
+      const { message } = action.payload;
+      if (message)
+        state.errorMessage = {
+          username: message.username || '',
+          password: message.password || '',
+          repeat_password: message.repeat_password || '',
+          first_name: message.first_name || '',
+          last_name: message.last_name || '',
+          age: message.age || '',
+        };
     });
   },
 });
 
-export const selectUser = (state) => state.user;
 export const selectIsError = (state) => state.user.isError;
 export const selectErrorMessages = (state) => state.user.errorMessage;
 

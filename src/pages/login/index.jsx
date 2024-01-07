@@ -4,18 +4,25 @@ import SpringLogo from '../../components/spring-logo';
 import LoginInput from '../../components/login-input';
 import { useAuth } from '../../hooks';
 import { Link, useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { selectErrorMessages, selectIsError } from '../../store/userSlice';
 
 const LoginPage = () => {
   const [username, setUserName] = useState('');
   const [password, setPassword] = useState('');
-  const { login, isError } = useAuth();
+  const { login } = useAuth();
+  const isError = useSelector(selectIsError);
+  const errorMessages = useSelector(selectErrorMessages);
 
   const navigate = useNavigate();
 
-  let handleSubmit = (e) => {
+  let handleSubmit = async (e) => {
     e.preventDefault();
-    login({ username, password });
-    if (!isError) navigate('/');
+    await login({ username, password });
+    if (!isError)
+      setTimeout(() => {
+        navigate('/');
+      }, 100);
   };
 
   return (
@@ -23,7 +30,12 @@ const LoginPage = () => {
       <form className='login-form'>
         <SpringLogo />
         <div className='input-container'>
-          <LoginInput type='text' placeholder='Username' setValue={setUserName} isError={isError} />
+          <LoginInput
+            type='text'
+            placeholder='Username'
+            setValue={setUserName}
+            errorText={errorMessages.username}
+          />
           <LoginInput
             type='password'
             placeholder='Password'

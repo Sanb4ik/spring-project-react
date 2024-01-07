@@ -2,8 +2,8 @@ import { useState } from 'react';
 import '../login/index.css';
 import SpringLogo from '../../components/spring-logo';
 import LoginInput from '../../components/login-input';
-import { Link } from 'react-router-dom';
-import { createUser, selectErrorMessages } from '../../store/userSlice';
+import { Link, useNavigate } from 'react-router-dom';
+import { createUser, selectErrorMessages, selectIsError } from '../../store/userSlice';
 import { useDispatch, useSelector } from 'react-redux';
 
 const SignUp = () => {
@@ -14,12 +14,18 @@ const SignUp = () => {
   const [last_name, setLastName] = useState('');
   const [age, setAge] = useState(0);
 
+  const isError = useSelector(selectIsError);
   const errorMessages = useSelector(selectErrorMessages);
   const dispatch = useDispatch();
+
+  const navigate = useNavigate();
 
   let handleSubmit = (e) => {
     e.preventDefault();
     dispatch(createUser({ username, password, repeat_password, first_name, last_name, age }));
+    if (!isError) {
+      navigate('/login');
+    }
   };
 
   return (
